@@ -1,7 +1,7 @@
 package com.fedex.springboot.microservice.demo.ULDlifecycle;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ContainerRepository extends 
-    JpaRepository<Container, Long>{
-  Container findByFromAndTo(String id);
+
+public interface ContainerRepository{
+  Container findById(String id);
 }

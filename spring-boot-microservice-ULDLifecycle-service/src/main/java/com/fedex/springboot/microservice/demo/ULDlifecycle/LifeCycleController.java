@@ -19,7 +19,7 @@ public class LifeCycleController {
     (@PathVariable String id){
     
     Container containerObject = 
-        repository.findByFromAndTo(id);
+        repository.findById(id);
     
     containerObject.setPort(
         Integer.parseInt(environment.getProperty("local.server.port")));
