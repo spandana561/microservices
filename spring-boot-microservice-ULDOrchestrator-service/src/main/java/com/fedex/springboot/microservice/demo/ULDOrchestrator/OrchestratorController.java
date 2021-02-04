@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 public class OrchestratorController {
+	
+  @Autowired
+  private Environment environment;
   
   
   @GetMapping("/ULDOrchestrator/find/{id}")
@@ -16,20 +19,21 @@ public class OrchestratorController {
     (@PathVariable String id){
 
 	    
-ResponseEntity<OrchestratorBean> responseEntity = new RestTemplate().getForEntity(
-		"http://localhost:8000/ULDLifecycle/find/{id}", OrchestratorBean.class,
+	  ResponseEntity<OrchestratorBean> responseEntity = new RestTemplate().getForEntity(
+		"http://"+environment.getProperty("hostname")+":8000/ULDLifecycle/find/{id}", OrchestratorBean.class,
 		id);
 
-OrchestratorBean response = responseEntity.getBody();
+	  OrchestratorBean response = responseEntity.getBody();
 
-boolean status;
+	  boolean status;
 
-if (id.equals(response.getId()))
-	status = true;
-else 
-	status = false;
+	  if (id.equals(response.getId()))
+		  status = true;
+	  else 
+		  status = false;
 
-return new OrchestratorBean(id,status);
+	  return new OrchestratorBean(id,status);
+	  
 
   }
 }
